@@ -8,7 +8,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.FileNotFoundException;
 
-public class Add extends JFrame implements ReaderAndWriter{
+public class Add extends JFrame{
     public Add(final CourseManagement cm, final SemesterManagement sm){
 
         setVisible(true);

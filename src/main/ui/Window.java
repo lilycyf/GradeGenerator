@@ -32,19 +32,19 @@ public class Window extends JFrame {
             public void itemStateChanged(ItemEvent e) {
                 if(e.getStateChange() == ItemEvent.SELECTED)
                 {
-                    DefaultComboBoxModel Courses = new DefaultComboBoxModel();
+                    DefaultComboBoxModel dcbmCourses = new DefaultComboBoxModel();
                     if(cobSemesters.getSelectedItem().equals("All")){
                         for(Course c: cm.getCourses()){
-                            Courses.addElement(c.getCourseName());
+                            dcbmCourses.addElement(c.getCourseName());
                         }
                     }else {
                         for (Course c : cm.getCourses()) {
                             if (c.getSemester().getYear().equals(cobSemesters.getSelectedItem())) {
-                                Courses.addElement(c.getCourseName());
+                                dcbmCourses.addElement(c.getCourseName());
                             }
                         }
                     }
-                    cobCourses.setModel(Courses);
+                    cobCourses.setModel(dcbmCourses);
                 }
             }
         });
