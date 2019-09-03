@@ -1,9 +1,6 @@
 package ui;
 
-import model.Course;
-import model.CourseManagement;
-import model.Semester;
-import model.SemesterManagement;
+import model.*;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
@@ -50,8 +47,10 @@ public class Add extends JFrame implements ReaderAndWriter{
                 Semester s = new Semester(txtSemester.getText());
                 Course c = new Course(txtCourseNum.getText(),s);
 
-                sm.addCourse(c);
-                cm.addCourse(c);
+                if(!cm.getCourses().contains(c)) {
+                    sm.addCourse(c);
+                    cm.addCourse(c);
+                }
 
                 try {
                     new Writer(cm, sm);

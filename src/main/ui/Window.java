@@ -17,10 +17,8 @@ public class Window extends JFrame {
 
     public Window(final CourseManagement cm, final SemesterManagement sm){
 
-
+        setTitle("GradeGenerator");
         setVisible(true);
-
-
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         setBounds(100, 100, 354, 342);
