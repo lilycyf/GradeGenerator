@@ -1,21 +1,33 @@
 package model;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class Component {
     private String name;
-    private Double percentage;
-    private List<UnitWork> unitWorks = new ArrayList<>();
+    private Double marksYouGet;
+    private Double marksOutOf;
+    private Double marksOutOfInPercentage;
 
-    public Component(String name, Double percentage) {
+    public void setMarksYouGet(Double marksYouGet) {
+        this.marksYouGet = marksYouGet;
+    }
+
+    public void setMarksOutOf(Double marksOutOf) {
+        this.marksOutOf = marksOutOf;
+    }
+
+    public Double getMarksYouGet() {
+        return marksYouGet;
+    }
+
+    public Double getMarksOutOf() {
+        return marksOutOf;
+    }
+
+    public Component(String name, Double marksOutOfInPercentage) {
         this.name = name;
-        this.percentage = percentage;
+        this.marksOutOfInPercentage = marksOutOfInPercentage;
     }
 
-    public void addUnitWork(UnitWork uw){
-        unitWorks.add(uw);
-    }
+
 
     public String getName() {
         return name;
@@ -25,12 +37,12 @@ public class Component {
         this.name = name;
     }
 
-    public Double getPercentage() {
-        return percentage;
+    public Double getMarksOutOfInPercentage() {
+        return marksOutOfInPercentage;
     }
 
-    public void setPercentage(Double percentage) {
-        this.percentage = percentage;
+    public void setMarksOutOfInPercentage(Double marksOutOfInPercentage) {
+        this.marksOutOfInPercentage = marksOutOfInPercentage;
     }
 
 }

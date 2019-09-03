@@ -27,7 +27,7 @@ public class SaveCourse {
         for (Component c : course.getComponents()) {
             m = new LinkedHashMap();
             m.put("Name", c.getName());
-            m.put("Percentage", c.getPercentage());
+            m.put("Percentage", c.getMarksOutOfInPercentage());
             ja.add(m);
         }
 

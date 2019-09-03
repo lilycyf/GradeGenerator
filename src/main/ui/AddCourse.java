@@ -2,6 +2,7 @@ package ui;
 
 import model.Component;
 import model.Course;
+import model.Semester;
 import org.json.simple.parser.ParseException;
 
 import java.io.IOException;
@@ -22,7 +23,7 @@ public class AddCourse {
         if (valid) {
             System.out.println(course.getCourseName());
             for (Component c : course.getComponents()) {
-                System.out.println(c.getName() + ": " + c.getPercentage());
+                System.out.println(c.getName() + ": " + c.getMarksOutOfInPercentage());
             }
             System.out.println("[1]save");
             System.out.println("[2]cancel");
@@ -59,14 +60,14 @@ public class AddCourse {
         Scanner myObj = new Scanner(System.in);
         System.out.println("Please enter a course number.");
         String courseName = myObj.nextLine();
-        Course course = new Course(courseName);
+        Course course = new Course(courseName, new Semester(""));
         return course;
     }
 
     public Boolean percentageValid(List<Component> componentList) {
         Double totalPercentage = 0.0;
         for (Component c : componentList) {
-            totalPercentage += c.getPercentage();
+            totalPercentage += c.getMarksOutOfInPercentage();
         }
 
 
