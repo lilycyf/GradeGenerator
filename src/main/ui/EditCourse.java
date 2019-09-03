@@ -32,9 +32,28 @@ public class EditCourse extends JFrame {
         defaultTableModel.addColumn("percentage");
         defaultTableModel.addColumn("marks you get in percentage");
         defaultTableModel.addColumn("marks out of in percentage");
-        defaultTableModel.addRow( new Object[]{"Component1", "3", "5", "60%", "48%", "70%"});
-        defaultTableModel.addRow( new Object[]{"Component2", "4", "5", "80%", "24%", "30%"});
-        defaultTableModel.addRow( new Object[]{"Total", null, null, null, "72%", "100%"});
+
+        Double totalMarksYouGetInPercentage = 0.0;
+        Double totalMarksOutOfInPercentage = 0.0;
+
+        for(Component component: course.getComponents()){
+            String name = component.getName();
+
+            Double marksOutOfInPercentage = component.getMarksOutOfInPercentage();
+            Double marksYouGet = component.getMarksYouGet();
+            Double marksOutOf = component.getMarksOutOf();
+
+            Double percentage = marksYouGet/marksOutOf*100;
+            Double marksYouGetInPercentage = percentage/100*marksOutOfInPercentage;
+
+            totalMarksYouGetInPercentage += marksYouGetInPercentage;
+            totalMarksOutOfInPercentage += marksOutOfInPercentage;
+
+
+            defaultTableModel.addRow( new Object[]{name,marksYouGet,marksOutOf,percentage,marksYouGetInPercentage,marksOutOfInPercentage});
+        }
+
+        defaultTableModel.addRow( new Object[]{"Total", null, null, null, totalMarksYouGetInPercentage, totalMarksOutOfInPercentage});
 
 
 
@@ -63,10 +82,10 @@ public class EditCourse extends JFrame {
 
                 for(int i = 0; i < rowCount; i++){
                     String name = (String) defaultTableModel.getValueAt(i,0);
-                    String mooInPercentage = (String)defaultTableModel.getValueAt(i,5);
-                    Double marksOutOfInPercentage = Double.valueOf(mooInPercentage.substring(0, mooInPercentage.lastIndexOf("%")));
-                    Double marksYouGet = Double.valueOf((String)defaultTableModel.getValueAt(i,1));
-                    Double marksOutOf = Double.valueOf((String)defaultTableModel.getValueAt(i,2));
+
+                    Double marksOutOfInPercentage = Double.valueOf(defaultTableModel.getValueAt(i,5).toString());
+                    Double marksYouGet = Double.valueOf(defaultTableModel.getValueAt(i,1).toString());
+                    Double marksOutOf = Double.valueOf(defaultTableModel.getValueAt(i,2).toString());
                     Component component = new Component(name, marksOutOfInPercentage);
                     component.setMarksOutOf(marksOutOf);
                     component.setMarksYouGet(marksYouGet);
