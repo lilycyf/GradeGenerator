@@ -25,7 +25,7 @@ public class EditCourse extends JFrame {
 
         setVisible(true);
 
-        setBounds(100, 100, 800, 300);
+        setBounds(200, 100, 800, 300);
         JPanel contentPane = new JPanel();
         contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
         setContentPane(contentPane);
@@ -97,6 +97,7 @@ public class EditCourse extends JFrame {
         jTableHeader.setReorderingAllowed(false);
 
 
+
         final TableModel tableModel = table.getModel();
 
         tableModel.addTableModelListener(new TableModelListener() {
@@ -152,7 +153,7 @@ public class EditCourse extends JFrame {
                 }
             }
         });
-        btnSave.setBounds(600, 186, 150, 25);
+        btnSave.setBounds(600, 200, 150, 25);
         contentPane.add(btnSave);
 
         JButton btnAddComponent = new JButton("Add Component");
@@ -160,15 +161,24 @@ public class EditCourse extends JFrame {
             @Override
             public void mouseClicked(MouseEvent arg0) {
                 defaultTableModel.insertRow((defaultTableModel.getRowCount()-1), new Object[]{"new Component", 1.0, 1.0, 100.0, 100.0, 100.0});
-
                 resetTotal(defaultTableModel);
-
-
-
             }
         });
         btnAddComponent.setBounds(600, 140, 150, 25);
         contentPane.add(btnAddComponent);
+
+        JButton btnRemoveComponent = new JButton("Remove Component");
+        btnRemoveComponent.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent arg0) {
+                if(table.getSelectedRow()!= table.getRowCount()-1 && table.getSelectedRow()!= -1) {
+                    defaultTableModel.removeRow(table.getSelectedRow());
+                    resetTotal(defaultTableModel);
+                }
+            }
+        });
+        btnRemoveComponent.setBounds(600, 170, 150, 25);
+        contentPane.add(btnRemoveComponent);
 
         SwingUtilities.updateComponentTreeUI(this);
     }

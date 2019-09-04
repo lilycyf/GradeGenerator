@@ -1,4 +1,4 @@
-package ui;
+package Others;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -46,7 +46,7 @@ public class ViewCoursesList {
             new AddCourse();
 
         } else if (nextLine == 2) {
-            new EditCourses();
+
         }
     }
 }

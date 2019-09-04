@@ -6,9 +6,8 @@ import java.util.List;
 public class SemesterManagement {
     private List<Semester> semesters = new ArrayList<>();
 
-
-
     public SemesterManagement(){
+
     }
 
     public List<Semester> getSemesters() {
@@ -26,6 +25,18 @@ public class SemesterManagement {
                 }
             }
         }
+    }
 
+    public void removeCourse(Course course){
+        for(Semester s:semesters){
+            if(course.getSemester().equals(s)){
+                s.removeCourse(course);
+                if(s.getCourses().isEmpty()){
+                    semesters.remove(s);
+                    return;
+                }
+            }
+
+        }
     }
 }

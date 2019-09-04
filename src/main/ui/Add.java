@@ -8,12 +8,16 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.FileNotFoundException;
 
-public class Add extends JFrame{
-    public Add(final CourseManagement cm, final SemesterManagement sm){
+public class Add extends JFrame {
+    JLabel lblSuccess;
+
+    public Add(final CourseManagement cm, final SemesterManagement sm, final JComboBox cc, final JComboBox cs){
+
+        setTitle("Add Course");
 
         setVisible(true);
 
-        setBounds(100, 100, 278, 301);
+        setBounds(200, 100, 300, 301);
         JPanel contentPane = new JPanel();
         contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
         setContentPane(contentPane);
@@ -33,15 +37,20 @@ public class Add extends JFrame{
         txtCourseNum.setColumns(10);
 
         JLabel lblSemEster = new JLabel("Semester");
-        lblSemEster.setBounds(28, 40, 56, 16);
+        lblSemEster.setBounds(20, 40, 56, 16);
         contentPane.add(lblSemEster);
 
         JLabel lblCourseNum = new JLabel("Course Num");
-        lblCourseNum.setBounds(28, 82, 75, 16);
+        lblCourseNum.setBounds(20, 82, 75, 16);
         contentPane.add(lblCourseNum);
 
-        JButton btnEnter = new JButton("Enter");
-        btnEnter.addMouseListener(new MouseAdapter() {
+        lblSuccess = new JLabel("Course");
+        lblSuccess.setBounds(20, 180, 250, 16);
+        contentPane.add(lblSuccess);
+        lblSuccess.setVisible(false);
+
+        JButton btnAdd = new JButton("Add");
+        btnAdd.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent arg0) {
                 Semester s = new Semester(txtSemester.getText());
@@ -50,6 +59,11 @@ public class Add extends JFrame{
                 if(!cm.getCourses().contains(c)) {
                     sm.addCourse(c);
                     cm.addCourse(c);
+                    lblSuccess.setText(c.getCourseName() +" have been added successfully!");
+                    lblSuccess.setVisible(true);
+                }else {
+                    lblSuccess.setText(c.getCourseName() +" is ready in the system.");
+                    lblSuccess.setVisible(true);
                 }
 
                 try {
@@ -57,12 +71,44 @@ public class Add extends JFrame{
                 } catch (FileNotFoundException e) {
                     e.printStackTrace();
                 }
+
+                renewCobSemesters(sm, cs);
+                renewCobCourses(cm, cc, cs);
+
+
+
             }
         });
-        btnEnter.setBounds(134, 130, 97, 25);
-        contentPane.add(btnEnter);
+        btnAdd.setBounds(150, 130, 97, 25);
+        contentPane.add(btnAdd);
+
 
 
         SwingUtilities.updateComponentTreeUI(this);
+    }
+
+    public void renewCobSemesters(SemesterManagement sm, JComboBox cs){
+        DefaultComboBoxModel dcbmSemesters = new DefaultComboBoxModel();
+        dcbmSemesters.addElement("All");
+        for(Semester s: sm.getSemesters()){
+            dcbmSemesters.addElement(s.getYear());
+        }
+        cs.setModel(dcbmSemesters);
+    }
+
+    public void renewCobCourses(CourseManagement cm, JComboBox cc, JComboBox cs) {
+        DefaultComboBoxModel dcbmCourses = new DefaultComboBoxModel();
+        if(cs.getSelectedItem().equals("All")){
+            for(Course c: cm.getCourses()){
+                dcbmCourses.addElement(c.getCourseName());
+            }
+        }else {
+            for (Course c : cm.getCourses()) {
+                if (c.getSemester().getYear().equals(cs.getSelectedItem())) {
+                    dcbmCourses.addElement(c.getCourseName());
+                }
+            }
+        }
+        cc.setModel(dcbmCourses);
     }
 }

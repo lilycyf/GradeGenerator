@@ -9,8 +9,6 @@ public class Course {
     private List<Component> components = new ArrayList<>();
     private Semester semester;
 
-
-
     public Course(String courseName, Semester semester) {
         this.courseName = courseName;
         this.semester = semester;
@@ -24,14 +22,6 @@ public class Course {
         }
     }
 
-    public Semester getSemester() {
-        return semester;
-    }
-
-    public List<Component> getComponents(){
-        return components;
-    }
-
     public void addComponent(Component c){
         components.add(c);
     }
@@ -42,6 +32,14 @@ public class Course {
 
     public String getCourseName() {
         return courseName;
+    }
+
+    public Semester getSemester() {
+        return semester;
+    }
+
+    public List<Component> getComponents(){
+        return components;
     }
 
     @Override

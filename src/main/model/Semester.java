@@ -21,17 +21,17 @@ public class Semester {
 
     }
 
+    public void removeCourse(Course course){
+        courses.remove(course.getCourseName());
+
+    }
+
     public List<String> getCourses() {
         return courses;
     }
 
     public String getYear() {
         return year;
-    }
-
-    public void deleteCourse(Course course){
-        courses.remove(course.getCourseName());
-
     }
 
     @Override
