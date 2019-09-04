@@ -1,4 +1,4 @@
-package Others;
+package others;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;

@@ -1,4 +1,4 @@
-package Others;
+package others;
 
 import model.Component;
 import model.Course;
