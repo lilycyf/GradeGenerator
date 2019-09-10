@@ -4,8 +4,6 @@
     <root id="archive" name="GradeGenerator.jar">
       <element id="module-output" name="GradeGenerator" />
       <element id="extracted-dir" path="$PROJECT_DIR$/../json-simple-1.1.1.jar" path-in-jar="/" />
-      <element id="file-copy" path="$PROJECT_DIR$/Courses.json" />
-      <element id="file-copy" path="$PROJECT_DIR$/Semesters.json" />
     </root>
   </artifact>
 </component>
